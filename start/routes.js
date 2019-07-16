@@ -17,7 +17,7 @@
 const Route = use('Route')
 
 Route.resource("usuarios","UsuarioController")
-Route.resource("postagens","PostagenController").middleware(["auth"])
+Route.resource("postagens","PostagenController")/* .middleware(["auth"]) */
 Route.post("login","UsuarioController.gettoken")
 
 Route.get("postagensusuarios/:id","UsuarioController.postagensUsuarios")
