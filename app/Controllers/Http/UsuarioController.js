@@ -5,10 +5,22 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const UsuarioModel= use ("App/Models/User")
+
 /**
  * Resourceful controller for interacting with usuarios
  */
 class UsuarioController {
+/**
+ método de teste
+ 
+
+ async create ({request}){
+   const data = request.only(["username", "email", "password"])
+   const User = await UsuarioModel.create(data)
+   return User
+ }*/
+
+
   /**
    * Show a list of all usuarios.
    * GET usuarios
