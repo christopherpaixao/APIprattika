@@ -9,7 +9,8 @@ class PostagensSchema extends Schema {
       table.increments()
       table.string("titulo",255).notNullable()
       table.text("corpo",255).notNullable()
-      table.string("imagem",255).notNullable()
+      //table.string("imagem",255).notNullable()
+      table.string('image_url').nullable() //upload d eimagem
 
       table.integer("usuarioid").unsigned()
 

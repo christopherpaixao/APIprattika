@@ -7,6 +7,10 @@ class Postagen extends Model {
     usuario(){
         return this.belongsTo('App/Models/User','usuarioid','id')
     }
+
+    images() {
+        return this.hasMany('App/Models/Image')
+      }
 }
 
 module.exports = Postagen

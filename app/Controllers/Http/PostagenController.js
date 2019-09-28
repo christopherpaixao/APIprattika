@@ -20,7 +20,16 @@ class PostagenController {
    */
   async index ({ request, response, view }) {
     const postagens=await PostagenModel.all(); //listar usuários
-    response.send(postagens)
+    
+
+    //teste método mostrar imagem
+    const postagens = Property.query()
+      .with('images')
+      .fetch()
+      //fim método
+
+      response.send(postagens)
+
   }
 
   /**
@@ -60,9 +69,17 @@ class PostagenController {
    */
   async show ({ params, request, response, view }) {
     const Postagen=await PostagenModel.find(params.id)
+    
+    //requisição imagens
+    const data=request.all();
+    Postagen.merge(data)
+    await Postagen.save()
+    //fim requisição
+
     response.send(Postagen)
   }
 
+  
   /**
    * Render a form to update an existing postagen.
    * GET postagens/:id/edit
