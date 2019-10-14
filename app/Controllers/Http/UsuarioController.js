@@ -44,9 +44,29 @@ class UsuarioController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const data=request.all() //await pq é um método assincrono
+    /*  const data=request.all() //await pq é um método assincrono
     const User=await UsuarioModel.create(data) //criar registro no banco
+    response.send(User)  */
+     try {
+    const data=request.all() //await pq é um método assincrono
+     // looking for user in database
+     const userExists = await UsuarioModel.findBy('email', data.email)
+
+     // if user exists don't save
+     if (userExists) {
+       return response
+         .status(400)
+         .send({ message: { error: 'Já existe um usuário com esse email' } })
+     }
+     const User=await UsuarioModel.create(data) //criar registro no banco
     response.send(User)
+  }catch (err) {
+    return response
+      .status(err.status)
+      .send(err)
+  } 
+    
+ 
   }
 
   /**
@@ -118,6 +138,7 @@ class UsuarioController {
     const autenticacao=await auth.attempt(email,password)//berificar se o email e senha estão no banco
     response.send(autenticacao)//retorno do token
   }
+
 }
 
 module.exports = UsuarioController

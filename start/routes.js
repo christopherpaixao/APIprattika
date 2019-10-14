@@ -16,10 +16,10 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.resource("usuarios","UsuarioController")
+Route.resource("usuarios","UsuarioController")/* .middleware(["auth"]) */
 Route.resource("postagens","PostagenController")/* .middleware(["auth"]) */
 Route.post("login","UsuarioController.gettoken")
-Route.post("users", 'UsuarioController.create').middleware('auth') //rota para criação de usuário
+Route.post("users", 'UsuarioController.create')/* .middleware(["auth"]) */ //rota para criação de usuário
 
 Route.get("postagensusuarios/:id","UsuarioController.postagensUsuarios")
 Route.get("usuariodapostagem/:id","PostagenController.usuarioDaPostagem")
@@ -29,8 +29,8 @@ Route.post("postagens/:id/images","ImageController.store")/* .middleware('auth')
 Route.get('images/:path', 'ImageController.show')
 
 //rotas de autenticação
-Route.post('/auth/register', 'AuthController.register')
-Route.post('/auth/login', 'AuthController.login')
+Route.post("/auth/register", "AuthController.register")
+Route.post("/auth/login", "AuthController.login")
 
 
 
